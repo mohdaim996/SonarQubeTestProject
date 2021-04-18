@@ -15,5 +15,9 @@
         <textarea name="review" id="review"></textarea>
         <input type="submit" value="Submit">
     </form>
+    {%for post in posts%}
+    {{post['name']}}
+    {{post['review']}}
+    {%endfor%}
 </body>
 </html>

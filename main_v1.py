@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 
 def readData():
-    with open(review.json) as json_file:
+    with open('review.json') as json_file:
         return json.load(json_file)
         
 def storeData(name, review): 
@@ -24,7 +24,9 @@ def home():
 
 @app.route("/review")
 def review():
-    return render_template('review.html', title = 'Home Page')
+    posts = readData()
+    print(posts)
+    return render_template('review.html', title = 'Home Page',posts=posts)
 @app.route('/post_review',methods=['POST', 'GET'])
 def post_review():
     name = request.form['name']
