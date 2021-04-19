@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{title}}</title>
 </head>
 <body>
    
-    <form action="{{ url_for('post_review') }}", method="POST">
+    <form action="{{ url_for('admin_check') }}", method="POST">
         <label>Name:</label>
         <input name="name" id="name"></input>
-        <label>Your Review:</label>
-        <textarea name="review" id="review"></textarea>
+        <label>Password:</label>
+        <input name="password" id="password" type="password"></input>
         <input type="submit" value="Submit">
     </form>
-    {%for post in posts%}
-    {{post['name']}}
-    {{post['review']}}
-    {%endfor%}
+    
 </body>
 </html>
