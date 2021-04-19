@@ -19,12 +19,19 @@ def admin():
 def admin_check():
     name = request.form['name']
     pswrd = request.form['password']
-    if (name == username) & (pswrd == password):  
-        log = open('static/log.txt') 
-           
-        return render_template('adminBoard.html', title = 'admin board', log=log.read())
-    else: 
-        return redirect(url_for(admin()))
+    try:
+        if (name == username) & (pswrd == password):  
+            log = open('static/log.txt') 
+            
+            return render_template('adminBoard.html', title = 'admin board', log=log.read())
+        else: 
+            return redirect(url_for(admin()))
+    except (ArithmeticError, RuntimeError) as e:
+        print(e)
+    except FloatingPointError as e:
+        print(e)
+    except OverflowError as e:
+        print(e)
 @app.route('/handle_data', methods=['POST', 'GET'])
 def handle_data():
     data = {}
