@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,session,redirect,url_for
+from flask import Flask,render_template,request,session,redirect,url_for,send_file
 import os
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ def admin_check():
     name = request.form['name']
     pswrd = request.form['password']
     if (name == username) & (pswrd == password):  
-        log = open('log.txt') 
+        log = open('static/log.txt') 
            
         return render_template('adminBoard.html', title = 'admin board', log=log.read())
     else: 
@@ -31,8 +31,12 @@ def handle_data():
     data['lname'] = request.form['lname']
     data['country'] = request.form['country']
     data['subject']= request.form['subject']
-    return os.popen(f' echo {data} >> log.txt').read()
+    return os.popen(f' echo {data} >> static/log.txt').read()
      #text & type main_v1.py & echo text
+@app.route('/download')
+def download():
+    file = request.args['file']
+    return send_file("static/%s" % file, as_attachment=True)
 if __name__ == '__main__':
     print("-- DEBUG MODE ----")
     app.run(debug=True, port='3000')
