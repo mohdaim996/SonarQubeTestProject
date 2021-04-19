@@ -1,10 +1,11 @@
 from flask import Flask,render_template,request,session,redirect,url_for,send_file
 import os
+from jinja2 import Environment
 
 app = Flask(__name__)
 username='admin'
 password='admin'
-
+env = Environment(autoescape=False )
 @app.route("/")
 def home(): 
     url = request.args.get('page')
