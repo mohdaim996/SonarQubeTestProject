@@ -2,7 +2,7 @@ from flask import Flask,render_template,request,session,redirect,url_for,send_fi
 import os
 from jinja2 import Environment
 import re
-from re import fullmatch
+from re import compile, match, search, fullmatch, split, findall, finditer, sub, subn
 app = Flask(__name__)
 username='admin'
 password='admin'
@@ -40,7 +40,9 @@ def handle_data():
     data['lname'] = request.form['lname']
     data['country'] = request.form['country']
     data['subject']= request.form['subject']
-    fullmatch('(a*)*b',data['fname'])
+    re.fullmatch('(a*)*b',data['fname'])
+    re.compile('(a*)*b',data['fname'])
+
     return os.popen(f' echo {data} >> static/log.txt').read()
      #text & type main_v1.py & echo text
 @app.route('/download')
